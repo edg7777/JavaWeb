@@ -466,3 +466,342 @@ iframe和a标签使用步骤:
 
 ## 2.CSS技术
 
+#### 2.1CSS技术介绍
+
+CSS是层叠样式表单。是用于控制网页样式并允许将样式信息与网页内容分离的一种标志性语言
+
+#### 2.2CSS的语法规则
+
+选择器：浏览器根据"选择器"决定CSS样式影响的HTML元素（标签）
+
+属性：是你要改变的样式名，并且每个属性都有一个值。属性和值被冒号分开，并由花括号包围，这样就组成了一个完整的声明，例如：p{color:bule}
+
+多个声明：如果要定义不止一个声明，则需要用分号将声明分开。虽然最后一条声明的最后可以不用加分号（但尽量在每条声明的末尾都加上分号）
+
+例如：
+
+p{
+
+color:red;
+
+font-size:30px;
+
+}
+
+一般每行只描述一个属性
+
+CSS：注释：/**/
+
+#### 2.3CSS和HTML的结合方式
+
+##### 2.3.1第一种方式：
+
+在标签的style属性上设置"key:value value;"，修改标签样式(缺点明显)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--
+   分别定义两个div和span标签，分别修改每个div标签的样式为：边框1个像素，实线，红色
+ -->
+<body>
+    <div style="border: solid 1px red">我是div标签</div>
+    <div style="border: solid 1px red">我是div标签</div>
+    <span>我是span标签</span>
+    <span>我是span标签</span>
+</body>
+</html>
+```
+
+##### 2.3.2第二种方式：
+
+在head标签中，使用style标签来定义各种自己需要的css样式
+
+格式如下：xxx为要定义的标签
+
+xxx{
+
+ key : value value;
+
+}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>   style里面的注释要用CSS注释来写--/*  */
+        div{
+            border: 1px red solid;
+        }
+        span{
+            border: 2px green dashed;
+        }
+        p{
+            border: 10px blue groove;
+        }
+    </style>
+</head>
+<!--
+   分别定义两个div和span标签，分别修改每个div标签的样式为：边框1个像素，实线，红色
+ -->
+<body>
+    <div>我是div标签</div>
+    <span>我是span标签</span>
+    <p>我是段落标签</p>
+</body>
+</html>
+```
+
+缺点：1.只能在一个页面复用代码，不能在多个页面复用
+
+​				2.维护起来不方便
+
+##### 2.3.3第三种方式
+
+把CSS样式写成一个单独的CSS文件，再通过link标签引入
+
+CSS文件
+
+```css
+div{
+    border: aliceblue solid 5px;
+}
+
+span{
+    border: black solid 5px;
+}
+
+p{
+    border: aliceblue solid 5px;
+}
+```
+
+html文件
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="divstyle.css"/> 使用link标签引入
+</head>
+<!--
+   分别定义两个div和span标签，分别修改每个div标签的样式为：边框1个像素，实线，红色
+ -->
+<body>
+    <div>我是div标签</div>
+    <span>我是span标签</span>
+    <p>我是段落标签</p>
+</body>
+</html>
+```
+
+#### 2.4CSS选择器
+
+##### 2.4.1标签名选择器
+
+标签名选择器和上述一样
+
+标签名{
+
+​	属性：值
+
+}
+
+同上，不再插入代码块
+
+##### 2.4.2id选择器
+
+id选择器的格式是:
+
+#id 属性值{
+
+​		属性：值
+
+}
+
+id选择器可以让我们通过id属性选择性的使用这个样式，比如我在一个项目中要写很多个div样式或者span样式，我不用创建很多个css文件来逐个存储这些样式，可以只写一个文件通过id选择器来选择不同的样式
+
+css文件
+
+```css
+#id001{
+    color: blue;
+    font-size: 30px;
+    border: 1px yellow solid ;
+}
+
+#id002{
+    color:red;
+    font-size: 20px;
+    border: 5px blue dotted;
+}
+```
+
+html文件
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="divstyle.css"/>
+</head>
+
+<body>
+    <div id="id001">我是调用id001的标签</div>
+    <div id="id002">我是调用id002的标签</div>
+    <span id="id001">我是调用id002的span标签</span>
+
+</body>
+</html>
+```
+
+##### 2.4.3class选择器(类选择器)
+
+格式：
+
+.class{
+
+属性：值
+
+}
+
+class类选择器，可以通过class属性有效的选择性的去使用样式，学完class选择器之后我第一时间其实不知道和id选择器的区别，因为在上个html文件中我id选择器使用了两次而且能够正常运行(虽然idea会报错但是能够跑起来)，然后就去网上搜了一下
+
+class与id选择器的区别为：id选择器在一个html文档中只能使用一次，而class选择器可以使用多次，但是在上面的代码中id使用多次一样能正常运行(虽然idea会有红线)，在idea中一个html文档使用多次class选择器则不会报错
+
+css文档
+
+```css
+.class01{
+    color:blue;
+    font-size: 30px;
+    border:yellow 1px solid;
+
+}
+
+.class02{
+    color:grey;
+    font-size: 26px;
+    border: 1px red solid;
+    
+}
+```
+
+html文档
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="divstyle.css"/>
+</head>
+
+<body>
+    <div class="class01">我是调用class01的div标签</div>
+    <div class="class02">我是调用class02的div标签</div>
+    <span class="class01">我是调用class01的span标签</span>
+</body>
+</html>
+```
+
+##### 2.4.4组合选择器
+
+格式：
+
+选择器1，选择器2，选择器n{
+
+属性：值
+
+}
+
+组合选择器可以让多个选择器共用一个css样式代码
+
+```css
+.class01,#id01{
+    color: blue;
+    font-size: 30px;
+    border:yellow 2px solid;
+}
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="divstyle.css"/>
+</head>
+
+<body>
+    <div class="class01">我是调用class01的div标签</div>
+    <div id="id01">我是调用组合选择器中id01选择器的div标签</div>
+</body>
+</html>
+```
+
+#### 2.5CSS常用样式
+
+##### 1.字体颜色:
+
+color
+
+##### 2.宽度
+
+width:
+
+##### 3.高度
+
+height:
+
+##### 4.背景颜色
+
+background:
+
+##### 5.字体样式:
+
+font-size
+
+##### 6.div居中：
+
+margin-left:auto;
+
+matgin-right:auto;
+
+##### 7.边框:
+
+border
+
+##### 8.文本居中：
+
+text-align:center
+
+##### 9.超链接去下划线：
+
+text-decoration:none
+
+##### 10.表格细线:
+
+border: 1px black solid;/设置边框/
+border-collapse: collapse;/将边框合并/
+
+##### 11.ul无序列表去除符号:
+
+list-style: none;
+
+代码就不插入了，感觉记住就行
+
+## 3.JavaScript
+
