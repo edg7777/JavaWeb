@@ -805,3 +805,522 @@ list-style: none;
 
 ## 3.JavaScript
 
+#### 3.1JavaScript介绍
+
+javaScript语言诞生主要是完成页面的数据验证，因此，它运行在客户端，需要运行浏览器来解析执行JavaScript代码。
+
+JS是弱类型
+
+java是强类型
+
+弱类型就是类型可变
+
+强类型就是定义变量的时候，类型已确定，而且不可变
+
+int i = 12;
+
+var i;
+
+i=12 数值型
+
+i=‘abc’ 字符串类型
+
+特点：
+
+交互性（它可以做的就是信息的动态交互）；
+安全性（不允许直接访问本地硬盘）
+跨平台性（只要是可以解释JS的浏览器都可以执行，和平台无关）
+
+#### 3.2JavaScript和HTML的结合方式
+
+##### 3.2.1第一种方式
+
+在head标签或者在body标签中使用script标签来书写JavaScript代码
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        alert("hello world");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+##### 3.2.2第二种方式
+
+先写一个script文件，在导入进html文件
+
+```javascript
+alert("hello world");
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--src是导入js文件的路径，绝地路径和相对路径均可
+    两种结合方法不能同时使用
+    要想使用那就再建立一个srcipt标签再写一个alert语句
+    -->
+    <script type="text/javascript" src="helloworld.js">
+    </script>
+    <script type="text/javascript">
+        alert("我是编程大王");
+    </script>
+</head>
+<body>
+</body>
+</html>
+```
+
+#### 3.3变量
+
+##### 3.3.1变量类型
+
+和java差不多不赘述了
+
+##### 3.3.2特殊值
+
+undefined 未定义
+
+null 空值
+
+NAN Not A Number 非数字类型
+
+##### 3.3.3变量定义格式
+
+var 变量名
+
+var 变量名=变量值
+
+#### 3.4关系运算
+
+等于：== 是简单的做字面值的比较
+
+全等于：=== 除了做字面值的比较之外还会比较两个变量的数据类型
+
+#### 3.5逻辑运算
+
+在javaScript语言中左右的变量，都可以作为一个boolean类型的变量去使用
+
+0,null,undefined,""（空串）都认为是false;
+
+##### 3.5.1&&且运算。
+
+有两种情况：
+
+1.当表达式全为真的时候。返回最后一个表达式的值
+2.当表达式中有一个为假的时候，返回第一个为假的表达式的值
+
+##### 3.5.2||或运算
+
+1.当表达式全为假的时候，返回最后一个表达式的值
+2.只要有一个表达式为真，就会返回第一个为真的表达式的值
+
+并且&&与运算和||或运算有短路
+
+短路就是说，当这两个运算有结果了之后，后面的表达式就不再执行
+
+#### 3.6数组
+
+js中数组的定义：
+
+ 格式：
+
+ var 数组名 = []; //空数组
+
+ var 数组名 = [1,‘abc’,true]; //定义数组同时赋值元素
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组</title>
+    <script type="text/javascript">
+        var arr = [];//定义一个空数组
+        arr[0] = 12;
+        alert(arr.length);//数组长度是1
+        //javaScript语言中的数组，只要我们通过数组下标赋值，那么最大的下标值就会自动的给数组做扩容操作。
+        arr[2] = "abc";
+        alert(arr.length);//数组长度是3
+        alert(arr[1]);//值为undefined
+        //数组的遍历
+        for(var i = 0; i<arr.length;i++){
+            alert(arr[i]);
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
+```
+
+#### 3.7函数
+
+> *js中的函数不能够重载，会直接覆盖*
+
+##### 3.7.1函数的定义方式一：
+
+function 函数名(形参列表){
+
+ 函数体
+
+}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--在js里面定义函不需要添加返回类型，可直接用return语句返回
+        如有参数不需要指明参数类型
+        函数和java一样要经过调用才能使用
+       -->
+    <script type="text/javascript">
+        function hello(){
+            alert("hello world");
+        }
+        hello();
+        function f(a,b){
+            alert("参数为"+a+"和"+b);
+        }
+        f(7,7);
+        function f1(n1,n2){
+            return n1+n2;
+        }
+        alert("sum="+f1(140,200));
+    </script>
+
+<body>
+</body>
+</html>
+```
+
+
+
+##### 3.7.2函数定义的方式二：
+
+var 函数名=function(形参列表){
+
+函数体
+
+}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--在js里面定义函不需要添加返回类型，可直接用return语句返回
+        如有参数不需要指明参数类型
+        函数和java一样要经过调用才能使用
+       -->
+    <script type="text/javascript">
+        var hello=function(){
+            alert("hello world");
+        }
+        hello();
+        var f=function (a,b){
+            alert("参数为"+a+"和"+b);
+        }
+        f(7,7);
+        var f1=function (n1,n2){
+            return n1+n2;
+        }
+        alert("sum="+f1(140,200));
+    </script>
+
+<body>
+</body>
+</html>
+```
+
+##### 3.7.3函数的arguments隐形参数
+
+js中的隐形参数和java中的可变参数一样，都是数组
+
+下面是一个计算传入参数和的函数 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function sum(){
+            alert("arguments隐形参数函数")
+            var s=0;
+            for(var i=0;i<arguments.length;i++){
+                if(typeof (arguments)=="number"){
+                    s+=arguments[i];
+                }
+            }
+            return s;
+        }
+        alert(sum(1,2,3,4,5));
+    </script>
+<body>
+</body>
+</html>
+
+```
+
+#### 3.8js中的自定义对象
+
+##### 3.8.1Object形式的自定义对象	(和java中的类差不多感觉)
+
+var 变量名 =new Object()  
+
+变量名.属性名=属性值
+
+变量名.函数名=function(){   定义一个函数
+} 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        var people=new Object();
+        people.team="EDG";
+        people.name="clearlove";
+        people.age=18;
+        people.func=function (){
+            alert("该人来自"+people.team+"名字是"+people.name+"年龄是"+people.age);
+        }
+        people.func();
+    </script>
+<body>
+</body>
+</html>
+```
+
+##### 3.8.2大括号定义的自定义对象(和定义一个标签的样式差不多感觉)
+
+var 对象名={   属性：属性值   ，  后面用逗号而不是分号
+
+​			函数名():function{}
+
+}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        var people={
+            team:"EDG",
+            name:"clearlove",
+            age:18,
+            func:function (){
+                alert("该人来自"+people.team+"名字是"+people.name+"年龄是"+people.age);
+            }
+        }
+        people.func();
+    </script>
+<body>
+</body>
+</html>
+```
+
+#### 3.9js中的事件
+
+> *事件是电脑输入设备和页面进行交互的响应*
+
+##### 3.9.1事件的注册
+
+> *事件的注册就是告诉浏览器当事件响应后要执行哪些代码*
+
+静态注册事件：通过html标签的事件属性直接赋予事件响应后的代码
+
+动态注册事件：通过js代码得到标签的dom对象，再通过dom对象.事件名=function(){} 这种形式赋予事件响应后的代码
+
+##### 3.9.2onload事件(加载完成事件)
+
+onload事件的浏览器解析完页面之后自动生成的
+
+```javascript
+window.onload=function (){
+    alert("动态注册的onload事件")
+}
+function onloadFun(){
+    alert("静态注册的onload事件");
+}
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="helloworld.js">
+    </script>
+<body onload="onloadFun()">  静态注册方法
+</body>
+</html>
+```
+
+##### 3.9.3onclick事件(单击事件)
+
+按完按钮之后页面出现的响应
+
+```javascript
+window.onclick=function(){
+    //先通过document.getElementById获取一个属性值，再通过该属性值.onclick=function(){}来实现动态注册onclick方法
+    var ele=document.getElementById("postgraduate");
+    ele.onclick=function (){
+        alert("我要考上华南理工");
+    }
+
+    var ele1=document.getElementById("study");
+    ele1.onclick=function (){
+        alert("我要变成编程大王");
+    }
+}
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="helloworld.js">
+    </script>
+<body>
+    <button id="study">
+        学习
+    </button>
+    <button id="postgraduate">
+        考研
+    </button>
+</body>
+</html>
+```
+
+##### 3.9.4onblur事件(失去焦点事件)
+
+常用于输入框失去焦点后验证其输入内容是否合法。
+
+```javascript
+window.onblur=function(){
+    //先通过document.getElementById获取一个属性值，再通过该属性值.onclick=function(){}来实现动态注册onclick方法
+    var ele=document.getElementById("username");
+    ele.onblur=function (){
+        console.log("用户名只能为纯数字");
+    }
+
+    var ele1=document.getElementById("password");
+    ele1.onblur=function (){
+       console.log("密码不能低于7位，既要有大小写也要有数字");
+    }
+}
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    用户名：<input type="text" id="uername">
+    <br/>
+    密码：<input type="password" id="password">
+</body>
+</html>
+```
+
+##### 3.9.5onchange事件(内容发生改变事件)
+
+ 常用于下拉列表和输入框内容发生改变后操作，每次改变之后都会自动调用该事件
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        window.onchange=function (){
+            alert("改变了喜欢的选手");  如果有多个下拉表可以在里面用doucument来接收对象
+        }
+    </script>
+<body>
+    <select>
+        <option>---请选择你最喜欢的选手---</option>
+        <option>clearlove</option>
+        <option>meiko</option>
+        <option>jiejie</option>
+        <option>deft</option>
+        <option>pawn</option>
+        <option>korol</option>
+        <option>haro</option>
+    </select>
+
+</body>
+</html>
+```
+
+##### 3.9.6onsumbit事件(表单提交事件)
+
+常用于表单提交前，验证所有表单项是否合法
+
+```javascript
+window.onsubmit=function(){
+    var e1=document.getElementById("ac1");
+    e1.onsubmit=function (){
+        console.log("动态注册1");
+        return false;  返回值为false就不会直接提交
+    }
+
+    var e2=document.getElementById("ac2");
+    e2.onsubmit=function (){
+        console.log("动态注册2");
+    }
+
+
+}
+
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="www.baidu.com" method="post">
+        <input type="submit" value="动态注册" id="ac1">
+    </form>
+
+    <form action="www.baidu.com" method="post">
+        <input type="submit" value="动态注册1" id="ac2">
+    </form>
+</body>
+</html>
+```
+
+#### 3.10DOM模型
+
