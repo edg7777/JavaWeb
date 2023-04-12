@@ -1383,6 +1383,90 @@ window.onsubmit=function(){
 </html>
 ```
 
+> getElementsByName:通过name属性来返回一个集合，elements要加s
+
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--代码实现页面的不同选择
+        Fun1为全选函数
+        Fun2为全不选函数
+        Fun3为反选函数
+		返回顺序从上到下
+    -->
+    <script type="text/javascript">
+        function onclickFun1(){
+            var e1=document.getElementsByName("hobby");
+            for(var i=0;i<e1.length;i++){
+                e1[i].checked=true;
+            }
+        }
+
+        function onclickFun2(){
+            var e1=document.getElementsByName("hobby");
+            for(var i=0;i<e1.length;i++){
+                e1[i].checked=false;
+            }
+        }
+
+        function onclickFun3(){
+            var e1=document.getElementsByName("hobby");
+            for(var i=0;i<e1.length;i++){
+                if(e1[i].checked){
+                    e1[i].checked=false;
+                }
+                else{
+                    e1[i].checked=true;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="checkbox" name="hobby" value="C++">C++
+    <input type="checkbox" name="hobby" value="Java">Java
+    <input type="checkbox" name="hobby" value="C">C
+    </br>
+    <button onclick="onclickFun1()">全选</button>
+    <button onclick="onclickFun2()">全不选</button>
+    <button onclick="onclickFun3()">反选</button>
+</body>
+</html>
+```
+
+> getElementsByTagName：通过标签对象来返回一个集合
+
+```javascript
+var e1=document.getElementsByTagName("input");
+```
+
+注意事项：id查询-->name查询-->tagname查询
+
+##### 3.10.2节点的常用属性和方法(节点就是标签对象)
+
+- childNodes属性，获取当前结点的所有子节点
+
+- firstChild属性，获取当前结点的第一个子节点
+
+- lastChild属性，获取当前结点的最后一个子节点
+
+- parentNode属性，获取当前结点的父节点
+
+- nextSibling属性，获取当前结点的下一个节点
+
+- previousSibling属性，获取当前结点的上一个节点
+
+- className属性，获取或设置标签的class属性值
+
+- innerHTML属性，表示获取/设置起始标签和结束标签中的内容
+
+- innerText属性，表示获取/设置起始标签和结束标签中的文本
+
+- innerText属性和innerHTML属性的区别
+
 #### 3.11正则表达式
 
 正则表达式定义：var 变量=/ /
@@ -1392,3 +1476,5 @@ window.onsubmit=function(){
 ![image-20230412202917547](笔记图片/image-20230412202917547.png)
 
 ![image-20230412202928111](笔记图片/image-20230412202928111.png)
+
+## 4.JQuery
