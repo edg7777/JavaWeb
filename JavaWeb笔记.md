@@ -910,7 +910,7 @@ var 变量名=变量值
 
 #### 3.5逻辑运算
 
-在javaScript语言中左右的变量，都可以作为一个boolean类型的变量去使用
+在javaScript语言中的变量，都可以作为一个boolean类型的变量去使用
 
 0,null,undefined,""（空串）都认为是false;
 
@@ -1322,5 +1322,73 @@ window.onsubmit=function(){
 </html>
 ```
 
-#### 3.10DOM模型
+#### 3.10DOM模型(文档对象模型)
 
+> 当网页被加载时，浏览器会创建一个页面的文档对象模型，通过DOM模型，js可以访问和改变html文档的所有元素
+>
+> DOM模型被结构化为对象树(下图为下面代码的DOM树)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="www.baidu.com">超链接</a>
+    <h1>标题</h1>
+</body>
+</html>
+```
+
+![image-20230412194142672](笔记图片/image-20230412194142672.png)
+
+##### 3.10.1Doucument文档中的方法
+
+> ##### getElementById:返回对拥有指定id的第一个对象的引用
+
+下面代码是检验用户的输入是否满足自己指定的规则.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--用document中的value方法来获取用户的输入，然后判读是否符合标准
+        test方法用于匹配字符串是否符合我的规则，匹配就返回true，反之返回false
+    -->
+    <script type="text/javascript">
+        function onclickFun(){
+            var e1=document.getElementById("username");
+            var rule=/^\w{5,12}$/;
+            var e2=document.getElementById("warning");
+            if(rule.test(e1.value)){
+                e2.innerHTML="用户名合法";
+            }
+            else{
+                e2.innerHTML="用户名不合法";
+            }
+        }
+    </script>
+</head>
+<body>
+    <from>
+        用户名称：<input type="text" id="username" />
+    </from>
+    <span style="color:red" id="warning"></span>
+    <button onclick="onclickFun()"> 校验</button>
+</body>
+</html>
+```
+
+#### 3.11正则表达式
+
+正则表达式定义：var 变量=/ /
+
+![image-20230412202904108](笔记图片/image-20230412202904108.png)
+
+![image-20230412202917547](笔记图片/image-20230412202917547.png)
+
+![image-20230412202928111](笔记图片/image-20230412202928111.png)
