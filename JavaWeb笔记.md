@@ -1478,3 +1478,77 @@ var e1=document.getElementsByTagName("input");
 ![image-20230412202928111](笔记图片/image-20230412202928111.png)
 
 ## 4.JQuery
+
+学习jquery要先去官网下一个js文件，下载完之后导入idea就可以了
+
+官网：https://jquery.com/
+
+#### 4.1介绍
+
+> jQuery就是Javascript和查询，辅助js开发的js类库
+
+#### 4.2JQuery的第一个程序
+
+实现点击按钮显示hello
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.6.4.js"></script>
+        <script type="text/javascript">
+        $(function (){
+            var e1=$("#001");
+            e1.click(function (){
+                alert("hello");
+            });
+        });
+    </script>
+<body>
+    <button id="001" >sayhello</button>
+</body>
+</html>
+```
+
+#### 4.3JQuery核心函数
+
+$就是JQuery的核心函数
+
+1. 传入参数为[函数]时：$(function(){ })
+
+   表示页面加载完成之后。相当于window.onload = function(){}
+
+2. 传入参数为[HTML字符串]时：
+
+   根据这个字符串创建元素节点对象，会对我们创建这个html标签对象
+
+3. 传入参数为[选择器字符串]时：
+
+   根据这个字符串查找元素结点对象
+
+4. $("#id属性值")； id 选择器，根据id查询标签对象
+
+5. $(“标签名”); 标签名选择器，可以根据指定的标签名查询标签对象
+
+6. $(".class属性值"); 类型选择器，可以根据class属性查询标签对象
+
+   传入参数为[DOM对象]时：
+
+7. 将DOM对象包装为jQuery对象返回
+   
+
+#### 4.4JQuery对象和DOM对象的区分
+
+> 通过DOM方法引用的对象全部都是DOM对象，通过JQuery库中的方法引用的对象全部都是JQuery对象
+>
+> JQuery对象是dom对象的数组＋JQuery提供的函数
+>
+> DOM对象转换为JQuery对象：var obj=$(dom对象)
+>
+> JQuery对象转换为DOM对象：var dom=$obj[下标]  (因为JQuery对象就是DOM对象的数组)
+
+#### 4.5JQuery选择器
+
+##### 4.5.1基础选择器
