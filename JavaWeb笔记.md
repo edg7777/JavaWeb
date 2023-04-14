@@ -1552,3 +1552,438 @@ $就是JQuery的核心函数
 #### 4.5JQuery选择器
 
 ##### 4.5.1基础选择器
+
+```html
+<!DOCTYPE htmlPUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta content="text/html charset=UTF-8"  http-equiv="Content-Type">
+  <title>$的本质</title>
+  <script type="text/javascript" src="./jquery-3.6.4.js"></script>
+  <script type="text/javascript">
+      //1、选择id为one的元素"background-color","#bbffaa"
+      $(function(){
+        var e1=$("#btn1");
+        e1.click(function (){
+          $("#one").css("background-color","DodgerBlue");
+        });
+      });
+      //2、选择class为mini的所有元素
+      $(function(){
+        var e1=$("#btn2");
+        e1.click(function(){
+          $(".mini").css("background-color","MediumSeaGreen");
+        });
+      });
+
+      //3、选择元素名是div的所有元素
+      $(function(){
+        var e1=$("#btn3");
+        e1.click(function(){
+          $("div").css("background-color","Violet");
+        });
+      });
+
+      //4、选择所有元素
+      $(function(){
+        var e1=$("#btn4");
+        e1.click(function(){
+          $("*").css("background-color","LightGray");
+        });
+      });
+
+      //5、选择所有的span元素和id为two的元素
+      $(function(){
+        var e1=$("#btn5");
+        e1.click(function(){
+          $("span,#two").css("background-color","Tomato"); 选中两个中间加上逗号
+        });
+      });
+
+  </script>
+  <style type="text/css">
+    div,span,p{
+      width:140px;
+      height:140px;
+      margin:5px;
+      background:#aaa;
+      border: #000 1px solid;
+      float: left;
+      font-size: 17px;
+      font-family: Verdana;
+    }
+    div.mini{
+      width: 55px;
+      height: 55px;
+      background-color: #aaa;
+      font-size:12px;
+    }
+    div.hide{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<button id="btn1">选择id为one的元素</button>
+<button id="btn2">选择class为mini的元素</button>
+<button id="btn3">选择元素名是div的所有元素</button>
+<button id="btn4">选择所有的元素</button>
+<button id="btn5">选择所有的span和id为two的元素</button>
+<br/>
+
+<div class="one" id="one">
+  选择id为one的元素
+  <div class="mini">class为mini</div>
+</div>
+<div class="one" id="two" title="test">
+  id为two,class为one,title为test的div
+  <div class="mini" title="other">class为mini,title为other</div>
+  <div class="mini" title="test">class为mini,title为test</div>
+</div>
+<div class="one">
+  <div class="mini">class为mini</div>
+  <div class="mini">class为mini</div>
+  <div class="mini">class为mini</div>
+  <div class="mini"></div>
+</div>
+<div class="one">
+  <div class="mini">class为mini</div>
+  <div class="mini">class为mini</div>
+  <div class="mini">class为mini</div>
+  <div class="mini" title="test">class为mini,title为test</div>
+</div>
+<div style="display: none" class="none">
+  style的display为"none的div"</div>
+<div class="hide">class为“hidden的div”</div>
+<div>
+  包含input的type为"hidden"的div
+  <input type="hidden" size="8">
+</div>
+<span class="one" id="span">^^span元素^^</span>
+</body>
+</html>
+
+```
+
+##### 4.5.2层级选择器
+
+ancestor descendant  祖先和后代
+
+parent > child	父节点选子节点
+
+prev + next	现节点选下一个节点
+
+prev ~ siblings	现节点后的所有siblings兄弟元素
+
+```html
+<!DOCTYPE htmlPUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta content="text/html charset=UTF-8"  http-equiv="Content-Type">
+  <title>$的本质</title>
+  <script type="text/javascript" src="./jquery-3.6.4.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      //1、选择body内的所有div元素
+      $("#btn1").click(function () {
+        $("body div").css("background-color","#bbffaa");
+      });
+      //2、在body内，选择div子元素
+      $("#btn2").click(function () {
+        $("body > div").css("background-color","#bbffaa");
+      });
+      //3、选择id为one的下一个div元素
+      $("#btn3").click(function () {
+        $("#one+div").css("background-color","#bbffaa");
+      });
+      //4、选择id为two的元素后面的所有div兄弟元素
+      $("#btn4").click(function () {
+        $("#two~div").css("background-color","#bbffaa");
+      });
+
+    });
+
+
+  </script>
+  <style type="text/css">
+    div,span,p{
+      width:140px;
+      height:140px;
+      margin:5px;
+      background:#aaa;
+      border: #000 1px solid;
+      float: left;
+      font-size: 17px;
+      font-family: Verdana;
+    }
+    div.mini{
+      width: 55px;
+      height: 55px;
+      background-color: #aaa;
+      font-size:12px;
+    }
+    div.hide{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<button id="btn1">选择body内的所有div元素</button>
+<button id="btn2">在body内，选择div子元素</button>
+<button id="btn3">选择id为one的下一个div元素</button>
+<button id="btn4">选择id为two的元素后面的所有div兄弟元素</button>
+
+<br/>
+
+<div class="one" id="one">
+  选择id为one的元素
+  <div class="mini">class为mini</div>
+</div>
+<div class="one" id="two" title="test">
+  id为two,class为one,title为test的div
+  <div class="mini" title="other">class为mini,title为other</div>
+  <div class="mini" title="test">class为mini,title为test</div>
+</div>
+<div class="one">
+  <div class="mini">class为mini</div>
+  <div class="mini">class为mini</div>
+  <div class="mini">class为mini</div>
+  <div class="mini"></div>
+</div>
+<div class="one">
+  <div class="mini">class为mini</div>
+  <div class="mini">class为mini</div>
+  <div class="mini">class为mini</div>
+  <div class="mini" title="test">class为mini,title为test</div>
+</div>
+<div style="display: none" class="none">
+  style的display为"none的div"</div>
+<div class="hide">class为“hidden的div”</div>
+<div>
+  包含input的type为"hidden"的div
+  <input type="hidden" size="8">
+</div>
+<span class="one" id="span">^^span元素^^</span>
+</body>
+</html>
+
+```
+
+##### 4.5.3基本过滤选择器
+
+first() 方法返回被选元素的首个元素。
+
+```javascript
+$(document).ready(function(){
+  $("div p").first();
+});
+```
+
+last() 方法返回被选元素的最后一个元素。
+
+```javascript
+$(document).ready(function(){
+  $("div p").last();
+});
+```
+
+eq() 方法返回被选元素中带有指定索引号的元素。
+
+```javascript
+$(document).ready(function(){
+  $("p").eq(1);
+});
+```
+
+not() 方法返回不匹配标准的所有元素。(下面的例子返回不带有类名 "intro" 的所有 <p> 元素：)
+
+```javascript
+$(document).ready(function(){
+  $("p").not(".intro");
+});
+```
+
+##### 4.5.4内容过滤选择器
+
+![image-20230414093959940](笔记图片/image-20230414093959940.png)
+
+------
+
+![image-20230414094026366](笔记图片/image-20230414094026366.png)
+
+------
+
+![image-20230414094048841](笔记图片/image-20230414094048841.png)
+
+##### 4.5.5属性过滤选择器
+
+![image-20230414093415692](笔记图片/image-20230414093415692.png)
+
+------
+
+<img src="笔记图片/image-20230414093445070.png" alt="image-20230414093445070"  />
+
+------
+
+![image-20230414093625533](笔记图片/image-20230414093625533.png)
+
+------
+
+![image-20230414093722071](笔记图片/image-20230414093722071.png)
+
+------
+
+![image-20230414093752252](笔记图片/image-20230414093752252.png)
+
+------
+
+![image-20230414093825547](笔记图片/image-20230414093825547.png)
+
+------
+
+![image-20230414093848743](笔记图片/image-20230414093848743.png)
+
+##### 4.5.6表单过滤选择器
+
+:标签名就可以直接选择
+
+#### 4.6JQuery元素筛选
+
+和选择器差不多
+
+#### 4.7JQuery中方法
+
+html()：可以设置和获取起始标签和结束标签中的内容
+
+text()：可以设置和获取起始标签和结束标签的文本
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.6.4.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //不传参数是获取，传参数是设置
+            alert($("div").html());
+            $("div").html("<h1>我是div中的标题<h1/>");
+
+            alert($("div").text());
+            $("div").text("<h1>我是div中的标题<h1/>");
+
+            $("button").click(function (){
+                var e1=$("#001");
+                alert(e1.val());
+                e1.val("我是编程大王");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div>我是div标签
+        <span>
+            我是div中的span标签
+        </span>
+    </div>
+
+    <input type="text" name="username" id="001"/>
+    <button>获取用户名</button>
+
+</body>
+</html>
+```
+
+value()：可以设置和获取**表单**项的value属性值
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.6.4.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //批量操作单选
+            $(":radio").val(["radio2"]);
+            //批量操作多框的选中状态
+            $(":checkbox").val(["checkboxes1","checkboxes2"]);
+            //批量操作多选下拉框的选中装态
+            $("#multiple").val(["mul1","mul2"]);
+            //操作单选下拉框选中状态
+            $("#danxuan").val(["dan1"]);
+            
+            //同时批量操作不同属性的val值
+            $(":radio,:checkbox,#multiple,#danxuan").val(["radio2","checkboxes1","dan1","checkboxes2","mul1","mul2",])
+        });
+
+    </script>
+</head>
+<body>
+    单选：
+    <input type="radio" name="danxuan" value="radio1">radio1
+    <input type="radio" name="danxuan" value="radio2">radio2<br/>
+    多选：
+    <input type="checkbox" name="checkboxes" value="checkboxes1">checkbox1
+    <input type="checkbox" name="checkboxes" value="checkboxes2">checkbox1
+    <input type="checkbox" name="checkboxes" value="checkboxes3">checkbox1<br/>
+    下拉多选：
+    <select id="multiple" multiple="multiple">
+        <option value="mul1">1</option>
+        <option value="mul2">2</option>
+        <option value="mul3">3</option>
+        <option value="mul4">4</option>
+    </select><br/>
+    下拉单选：
+    <select id="danxuan">
+        <option value="dan1">1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+    </select>
+</body>
+</html>
+
+```
+
+attr() 可以设置和获取属性的值，不推荐操作checked、readOnly、selected、diable等等。
+
+attr() 还可以操作非标准的属性。比如abc,bbj等
+
+prop() 可以设置和获取属性的值，只推荐操作checked、readOnly、selected、diable等等
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.6.4.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //attr
+            alert($(":checkbox:first").attr("name"));//获取
+            $(":checked:first").attr("name","check");//设置
+            alert($(":checkbox:last").attr("checked"));//官方觉得attr("checked")在未设置的情况下返回undefined是一种错误
+            alert($(":checkbox:last").prop("checked"));//返回true或false
+            $(":checkbox:last").prop("checked","true");//设置
+
+            //设置和获取非标准的属性值
+            $(":checkbox").attr("abc","abcValue");
+            alert($(":checkbox").attr("abc"));
+        });
+
+    </script>
+</head>
+<body>
+    多选：
+    <input type="checkbox" name="checkboxes" value="checkboxes1">checkbox1
+    <input type="checkbox" name="checkboxes" value="checkboxes2">checkbox1
+    <input type="checkbox" name="checkboxes" value="checkboxes3">checkbox1<br/>
+</body>
+</html>
+```
+
