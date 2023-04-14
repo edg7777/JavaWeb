@@ -1987,3 +1987,95 @@ prop() 可以设置和获取属性的值，只推荐操作checked、readOnly、s
 </html>
 ```
 
+#### 4.8JQuery中全选，全不选，反选
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.6.4.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //全选
+            $("#btn1").click(function (){
+                var e1=$(":checkbox");
+                e1.prop("checked",true);
+            });
+            //全不选
+            $("#btn2").click(function (){
+                var e1=$(":checkbox");
+                e1.prop("checked",false);
+            });
+            //反选
+            $("#btn3").click(function (){
+                var e1=$(":checkbox[name='items']");
+                for(var i=0;i<e1.length;i++){
+                    if(e1[i].checked){
+                        e1[i].checked=false;
+                    }
+                    else{
+                        e1[i].checked=true;
+                    }
+                }
+                //全选和全不选的框
+                var n1=$(":checkbox[name='items']:checked").length;//选中的框的个数
+                var n2=$(":checkbox[name='items']").length;//全部框的个数
+                var e2=$("#checkedAllBox");
+                if(n1==n2){
+                    e2.prop("checked",true);
+                }
+                else{
+                    e2.prop("checked",false);
+                }
+            });
+            $("#sub").click(function(){
+                var e1=$(":checkbox[name='items']:checked");
+                for(var i=0;i<e1.length;i++){
+                    alert(e1[i].value);
+                }
+            });
+
+            $("#checkedAllBox").click(function(){
+                if(this.checked){
+                    $(":checkbox[name='items']").prop("checked",true);
+                }
+                else{
+                    $(":checkbox[name='items']").prop("checked",false);
+                }
+            });
+
+            $(":checkbox[name='items']").click(function(){
+                var cnt1=$(":checkbox[name=items]").length;
+                var cnt2=$(":checkbox[name=items]:checked").length;
+                if(cnt1==cnt2){
+                    $("#checkedAllBox").prop("checked",true);
+                }
+                else{
+                    $("#checkedAllBox").prop("checked",false);
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<form method="post" action="">
+    你爱好的运动是？
+    <input type="checkbox" id="checkedAllBox"/>全选/全不选
+    <br/>
+    <input type="checkbox" name="items" value="足球"/>足球
+    <input type="checkbox" name="items" value="篮球"/>篮球
+    <input type="checkbox" name="items" value="游泳"/>游泳
+    <input type="checkbox" name="items" value="跑步"/>跑步
+    <br/>
+    <input type="button" id="btn1" value="全选"/>
+    <input type="button" id="btn2" value="全不选"/>
+    <input type="button" id="btn3" value="反选"/>
+    <input type="submit" id="sub" value="提交">
+</form>
+</body>
+</html>
+
+```
+
