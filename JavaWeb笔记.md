@@ -2079,3 +2079,419 @@ prop() 可以设置和获取属性的值，只推荐操作checked、readOnly、s
 
 ```
 
+#### 4.9DOM增删改
+
+1.内部插入：
+
+appendTo() a.appendTo(b) 把a插入到b的子元素的末尾，成为最后一个子元素这里a之前存在的位置会删除，然后放入新的位置中，相当于剪切，复制。
+
+prependTo() a.prependTo(b) 把a插入到b的子元素的前面，成为第一个子元素这里a之前存在的位置会删除，然后放入新的位置中，相当于剪切，复制。
+
+2.外部插入：
+
+insertAfter() a.insertAfter(b) 得到ba
+
+insertBefore() a.insertBefore(b) 得到ab
+
+3.替换：
+
+replaceWith() a.replaceWith(b); 用b替换a，将所有的b替换成一个a
+
+replaceAll() a.replaceAll(b); 用a替换b，用a替换所有的b
+
+4.删除：
+
+remove() a.remove(); 删除所有的a标签
+
+empty() a.empty(); 清空标签a里的内容
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.6.4.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $("<h2>这是一个h2标题</h2>").appendTo("div");
+            $("<h2>这是一个h2标题</h2>").prependTo("div");
+            $("<h2>这是一个h2标题</h2>").insertAfter("div");
+            $("<h2>这是一个h2标题</h2>").insertBefore("div");
+            $("div").replaceWith("<h2>这是一个h2标题</h2>");
+            $("<h2>这是一个h2标题</h2>").replaceAll("div");
+            $("div").remove();
+            $("div").empty();
+        });
+    </script>
+</head>
+<body>
+
+<div>div的div1<span>div里的span1</span></div>
+<div>div的div2<span>div里的span2</span></div>
+</body>
+</html>
+
+```
+
+下面代码实现两个下拉列表互相添加元素
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.6.4.js"></script>
+
+    <style type="text/css">
+        select{
+            width: 165px;
+            height: 100px;
+        }
+        div{
+            width: 450px;
+            height: 120px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#btn1").click(function (){
+                var e1=$("#selet1 option:selected");
+                var e2=$("#selet2");
+                e1.appendTo(e2);
+            });
+
+            $("#btn2").click(function (){
+                var e1=$("#selet1 option");
+                var e2=$("#selet2");
+                e1.appendTo(e2);
+            });
+
+            $("#btn3").click(function (){
+                var e1=$("#selet2 option:selected");
+                var e2=$("#selet1");
+                e1.appendTo(e2);
+            });
+
+            $("#btn4").click(function (){
+                var e1=$("#selet2 option");
+                var e2=$("#selet1");
+                e1.appendTo(e2);
+            });
+        });
+    </script>
+</head>
+<body>
+<form>
+    <div>
+        <select id="selet1" multiple="multiple">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+        </select>
+        <select id="selet2" multiple="multiple">
+        </select>
+    </div>
+
+    <table>
+        <tr>
+            <td>
+                <input type="button" id="btn1" value="将左边的选项添加到右边"><br/>
+                <input type="button" id="btn2" value="全部选项添加到右边">
+            </td>
+            <td>
+                <input type="button" id="btn3" value="将右边的选项添加到左边"><br/>
+                <input type="button" id="btn4" value="全部选项添加到左边">
+            </td>
+        </tr>
+    </table>
+</form>
+
+</select>
+</body>
+</html>
+
+```
+
+#### 4.10JQuery实现简单的页面管理系统
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script type="text/javascript" src="jquery-3.6.4.js"></script>
+  <script>
+    $(document).ready(function (){
+      //添加按钮
+      var e1=$("#add");
+      e1.click(function (){
+        var name=$("#empname").val();
+        var email=$("#empemail").val();
+        var salary=$("#empsal").val();
+        var p=$("<tr>" +
+                "<td>"+name+"</td>" +
+                "<td>"+email+"</td>" +
+                "<td>"+salary+"</td>"+
+                "<td><a href=\"deleteEmp? id=002\">Delete</a></td>")
+        p.appendTo($("#control"));
+        p.find("a").click(function (){
+          var res=$(this).parent().parent();
+          var name=res.find("td:first").text();
+          if(confirm("您确认要删除"+name+"员工信息吗")){
+            res.remove();
+          }
+          return false;
+        })
+      });
+
+      //对a标签的删除操作
+      var e2=$("a");
+      e2.click(function (){
+        var res=$(this).parent().parent();
+        var name=res.find("td:first").text();
+        if(confirm("您确认要删除"+name+"员工信息吗")){
+          res.remove();
+        }
+        return false;
+      })
+    });
+  </script>
+</head>
+<body>
+  <table align="center" id="control">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Salary</th>
+    </tr>
+    <tr>
+      <td>Brain</td>
+      <td>Brain@qq.com</td>
+      <td>5000</td>
+      <td><a href="deleteEmp?id=001">Delete</a></td>
+    </tr>
+    <tr>
+      <td>Peter</td>
+      <td>Peter@qq.com</td>
+      <td>10000</td>
+      <td><a href="deleteEmp?id=002">Delete</a></td>
+    </tr>
+    <tr>
+      <td>Chris</td>
+      <td>Chris@qq.com</td>
+      <td>8000</td>
+      <td><a href="deleteEmp?id=003">Delete</a></td>
+    </tr>
+  </table>
+  <h2 align="center">添加新员工</h2>
+  <table align="center">
+    <tr>
+    <td>name:<input type="text" id="empname"/></td>
+    </tr>
+    <tr>
+      <td>email:<input type="text" id="empemail"/></td>
+    </tr>
+    <tr>
+      <td>salary:<input type="text" id="empsal"/></td>
+    </tr>
+    <tr>
+      <td align="center">
+        <button type="button" id="add">添加</button>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+```
+
+#### 4.11CSS操作样式
+
+- addClass() 添加样式。
+- removeClass() 删除样式。
+- toggleClass() 有就删除，没有就添加样式。
+- offset() 获取和设置元素的坐标。
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery-3.6.4.js"></script>
+
+    <script type="text/javascript">
+        $(function (){
+            var $divEle = $("div:first");
+
+            $("#btn1").click(function () {
+                //addClass()添加样式
+                $divEle.addClass('blueBorder');
+            });
+            $("#btn2").click(function () {
+                //removeClass()删除样式
+                $divEle.removeClass("blueBorder");
+            });
+            $("#btn3").click(function () {
+                //toggleClass()有就删除没有就添加
+                $divEle.toggleClass("redDiv");
+            });
+            $("#btn4").click(function () {
+                //返回第一个匹配元素相对于文档的位置
+                $divEle.offset({
+                    top:100,
+                    left:50
+                });
+            });
+        })
+    </script>
+
+    <style type="text/css">
+
+        div{
+            width:100px;
+            heigth:260px;
+        }
+        div.whiteborder{
+            border: 2px white solid;
+        }
+        div.redDiv{
+            background-color: red;
+        }
+        div.blueBorder{
+            border: 5px blue solid;
+        }
+    </style>
+</head>
+<body>
+<table align="center">
+    <tr>
+        <td>
+            <div class="border">
+                这个div改变样式
+            </div>
+        </td>
+
+        <td>
+            <div class="btn">
+                <input type="button" value="addClass()" id="btn1"/><br/>
+                <input type="button" value="removeClass()" id="btn2"/><br/>
+                <input type="button" value="toggleClass()" id="btn3"/><br/>
+                <input type="button" value="offset()" id="btn4"/><br/>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+
+```
+
+#### 4.12JQuery动画操作
+
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    div{
+      background-color: blue;
+      border: 1px  solid;
+      width: 400px;
+      height: 200px;
+    }
+    td{
+      border: 1px black solid;
+    }
+  </style>
+  <script type="text/javascript" src="jquery-3.6.4.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#btn1").click(function () {
+        $("#div1").show();
+      });
+      $("#btn2").click(function () {
+        $("#div1").hide();
+      });
+      $("#btn3").click(function () {
+        $("#div1").toggle();
+      })
+      $("#btn4").click(function () {
+        $("#div1").fadeIn();
+      })
+      $("#btn5").click(function () {
+        $("#div1").fadeOut();
+      })
+      $("#btn6").click(function () {
+        $("#div1").fadeTo(2000,0.5);
+      })
+      $("#btn7").click(function () {
+        $("#div1").fadeToggle();
+      })
+    });
+  </script>
+</head>
+<body>
+
+<table style="border: 1px black solid">
+  <tr>
+    <td >
+      <button id="btn1">显示show()</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button id="btn2">隐藏hide()</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button id="btn3">显示/隐藏切换toggle()</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button id="btn4">淡入fadeln()</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button id="btn5">淡出fadeOut()</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button id="btn6">淡化到fadeTo()</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button id="btn7">淡化切换fadeToggle()</button>
+    </td>
+  </tr>
+</table>
+
+
+<div id="div1">
+  jQuery动画定义了很多种动画效果，可以很方便的使用这些动画效果
+</div>
+</body>
+</html>
+
+```
+
+#### 4.13JQuery事件操作
+
