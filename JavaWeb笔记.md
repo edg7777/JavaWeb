@@ -2495,3 +2495,269 @@ empty() a.empty(); 清空标签a里的内容
 
 #### 4.13JQuery事件操作
 
+##### 4.13.1原生js和jQuery加载完成之后的区别
+
+***他们分别在什么时候触发？***
+
+jQuery的页面加载完成之后是浏览器的内核解析完页面的标签创建好DOM对象之后就会立马执行。
+原生js的页面加载完成之后，除了要等浏览器内核解析完标签创建好DOM对象，还要等标签显示时需要的内容加载完成。
+***他们触发的顺序？***
+
+jQuery页面加载完成之后先执行
+原生js的页面加载完成之后后执行
+***他们执行的次数？***
+
+原生js的页面加载完成之后，只会执行最后一次赋值函数
+jQuery的页面加载完成之后是全部把注册的function函数，依次顺序全部执行。
+
+##### 4.13.2事件的冒泡
+
+事件的冒泡是指，父子元素同时监听同一个事件。当触发子元素的事件的时候，同时也被传递到了父元素的事件里去响应。
+
+在事件函数体内，return false可以阻止事件的冒泡传递。
+
+#### 4.14JQuery验证input内容
+
+其实之前写过一次很简单，然后这次我自己设置了个页面，代码是这样的
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+     body{
+       background-image:url("../imag/R-C.jpg");
+     }
+    table{
+      background-color: #fff; /*将table背景色设置为白色*/
+      background-size: 100px 200px;
+    }
+    input[type=text]{
+      border: none; /*去掉input的边框*/
+      background-color: #f1f1f1; /*将input背景色设置为灰色*/
+      padding: 10px; /*设置input内填充*/
+      margin-bottom: 10px; /*给不同输入框之间留出空隙*/
+    }
+    button{
+      background-color: aliceblue;
+      background-size: 100px 100px;
+    }
+    span{
+      color: red;
+    }
+    </style>
+  <script type="text/javascript" src="jquery-3.6.4.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      //验证用户名，密码是否符合规则
+      $("#btn1").click(function(){
+        var e1=$("#username").val();
+        var name_rul=/^\w{5,12}$/;
+        if(!name_rul.test(e1)){
+          $("#errormsg").text("用户名不合法");
+          return false;
+        }
+        else{
+          $("#errormsg").text("");
+        }
+        var e2=$("#password").val();
+        var psd_rul=/^\w{5,12}$/;
+        if(!psd_rul.test(e2)){
+          $("#errormsg").text("密码不合法");
+          return false;
+        }
+        else{
+          $("#errormsg").text("");
+        }
+
+        var e3=$("#repassword").val();
+        if(e3!=e2){
+          $("#errormsg").text("两次输入的密码不一致");
+          return false;
+        }
+        else{
+          $("#errormsg").text("");
+        }
+
+        var e4=$("#check").val();
+        if(e4==null||e4==""){
+          $("#errormsg").text("验证码不能为空");
+          return false;
+        }
+        else{
+          $("#errormsg").text("");
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+<img src="../imag/Snipaste_2023-04-03_23-51-50.png" width="600" height="700" align="left"/>
+<img src="../imag/Snipaste_2023-04-03_23-51-50.png" width="600" height="700" align="right"/>
+  <h1 align="center">欢迎注册Family Guy</h1>
+  <span id="errormsg"></span>
+  <table align="center" >
+    <tr>
+      <td>
+        用户名称：<input type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" id="username">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        用户密码：<input type="password" placeholder="请输入密码" autocomplete="off" tabindex="1" id="password">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        确认密码：<input type="password" placeholder="请再次输入密码" autocomplete="off" tabindex="1" id="repassword">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        验证码：<input type="text" placeholder="请输入验证码" autocomplete="off" tabindex="1" id="check">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button id="btn1" type="button">提交</button>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+```
+
+运行结果是这样的(有够丑的...)
+
+![image-20230416001417053](笔记图片/image-20230416001417053.png)
+
+然后我就把代码丢给GPT让他帮我搞工整一点
+
+代码是这样的
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      background-image: url("../imag/R-C.jpg");
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 500px;
+      background-color: #fff;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type=text], input[type=password] {
+      display: block;
+      width: 100%;
+      border: none;
+      background-color: #f1f1f1;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      background-color: aliceblue;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #cfe2ff;
+    }
+    span {
+      display: block;
+      text-align: center;
+      margin-bottom: 10px;
+      color: red;
+    }
+  </style>
+  <script type="text/javascript" src="jquery-3.6.4.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      //验证用户名，密码是否符合规则
+      $("#btn1").click(function(){
+        var e1=$("#username").val();
+        var name_rul=/^\w{5,12}$/;
+        if(!name_rul.test(e1)){
+          $("#errormsg").text("用户名不合法");
+          return false;
+        }
+        else{
+          $("#errormsg").text("");
+        }
+        var e2=$("#password").val();
+        var psd_rul=/^\w{5,12}$/;
+        if(!psd_rul.test(e2)){
+          $("#errormsg").text("密码不合法");
+          return false;
+        }
+        else{
+          $("#errormsg").text("");
+        }
+        var e3=$("#repassword").val();
+        if(e3!=e2){
+          $("#errormsg").text("两次输入的密码不一致");
+          return false;
+        }
+        else{
+          $("#errormsg").text("");
+        }
+        var e4=$("#check").val();
+        if(e4==null||e4==""){
+          $("#errormsg").text("验证码不能为空");
+          return false;
+        }
+        else{
+          $("#errormsg").text("");
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+<img src="../imag/Snipaste_2023-04-03_23-51-50.png" width="600" height="700" align="left"/>
+<img src="../imag/Snipaste_2023-04-03_23-51-50.png" width="600" height="700" align="right"/>
+<div class="container">
+  <h1>欢迎注册Family Guy</h1>
+  <span id="errormsg"></span>
+  <label for="username">用户名称：</label>
+  <input type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" id="username">
+  <label for="password">用户密码：</label>
+  <input type="password" placeholder="请输入密码" autocomplete="off" tabindex="1" id="password">
+  <label for="repassword">确认密码：</label>
+  <input type="password" placeholder="请再次输入密码" autocomplete="off" tabindex="1" id="repassword">
+  <label for="check">验证码：</label>
+  <input type="text" placeholder="请输入验证码" autocomplete="off" tabindex="1" id="check">
+  <button id="btn1" type="button">提交</button>
+</div>
+</body>
+</html>
+```
+
+运行结果是这样的(看上去好看多了...)
+
+![image-20230416001539332](笔记图片/image-20230416001539332.png)
+
+## 5.XML
+
