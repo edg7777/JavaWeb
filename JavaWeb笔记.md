@@ -2,7 +2,7 @@
 
 ## 1.HTML
 
-#### 1.1HTML文件书写规范和整体框架解析 
+### 1.1HTML文件书写规范和整体框架解析 
 
 ```html
 <!DOCTYPE html>     
@@ -20,27 +20,27 @@
 html的注释:<!--  注释  -->
 ```
 
-#### 1.2html标签的介绍
+### 1.2html标签的介绍
 
-##### 1.2.1标签的格式：
+#### 1.2.1标签的格式：
 
 <标签名>封装的数据</标签名>  带/的为结束标签
 
-##### 1.2.2标签名大小写不敏感
+#### 1.2.2标签名大小写不敏感
 
-##### 1.2.3标签拥有自己的属性
+#### 1.2.3标签拥有自己的属性
 
-###### 		1.2.3.1分为基本属性：bgcolor=“red” 可以修改简单的样式效果
+##### 		1.2.3.1分为基本属性：bgcolor=“red” 可以修改简单的样式效果
 
-###### 		1.2.3.2事件属性οnclick=“alert(‘你好！’);” 可以直接设置事件响应后的代码。
+##### 		1.2.3.2事件属性οnclick=“alert(‘你好！’);” 可以直接设置事件响应后的代码。
 
-##### 1.2.4标签又分为，单标签和双标签
+#### 1.2.4标签又分为，单标签和双标签
 
-###### 		1.2.4.1单标签格式：<标签名 />
+##### 		1.2.4.1单标签格式：<标签名 />
 
-###### 		1.2.4.2双标签格式：<标签名>…封装数据…<标签名/>
+##### 		1.2.4.2双标签格式：<标签名>…封装数据…<标签名/>
 
-#### 1.3标签的正确语法
+### 1.3标签的正确语法
 
 ```html
 <!DOCTYPE html>
@@ -76,7 +76,7 @@ html的注释:<!--  注释  -->
 
 ```
 
-#### 1.4常用标签介绍
+### 1.4常用标签介绍
 
 #### 1.4.1font字体标签
 
@@ -466,11 +466,11 @@ iframe和a标签使用步骤:
 
 ## 2.CSS技术
 
-#### 2.1CSS技术介绍
+### 2.1CSS技术介绍
 
 CSS是层叠样式表单。是用于控制网页样式并允许将样式信息与网页内容分离的一种标志性语言
 
-#### 2.2CSS的语法规则
+### 2.2CSS的语法规则
 
 选择器：浏览器根据"选择器"决定CSS样式影响的HTML元素（标签）
 
@@ -492,9 +492,9 @@ font-size:30px;
 
 CSS：注释：/**/
 
-#### 2.3CSS和HTML的结合方式
+### 2.3CSS和HTML的结合方式
 
-##### 2.3.1第一种方式：
+#### 2.3.1第一种方式：
 
 在标签的style属性上设置"key:value value;"，修改标签样式(缺点明显)
 
@@ -517,7 +517,7 @@ CSS：注释：/**/
 </html>
 ```
 
-##### 2.3.2第二种方式：
+#### 2.3.2第二种方式：
 
 在head标签中，使用style标签来定义各种自己需要的css样式
 
@@ -562,7 +562,7 @@ xxx{
 
 ​				2.维护起来不方便
 
-##### 2.3.3第三种方式
+#### 2.3.3第三种方式
 
 把CSS样式写成一个单独的CSS文件，再通过link标签引入
 
@@ -603,9 +603,9 @@ html文件
 </html>
 ```
 
-#### 2.4CSS选择器
+### 2.4CSS选择器
 
-##### 2.4.1标签名选择器
+#### 2.4.1标签名选择器
 
 标签名选择器和上述一样
 
@@ -617,7 +617,7 @@ html文件
 
 同上，不再插入代码块
 
-##### 2.4.2id选择器
+#### 2.4.2id选择器
 
 id选择器的格式是:
 
@@ -665,7 +665,7 @@ html文件
 </html>
 ```
 
-##### 2.4.3class选择器(类选择器)
+#### 2.4.3class选择器(类选择器)
 
 格式：
 
@@ -716,7 +716,7 @@ html文档
 </html>
 ```
 
-##### 2.4.4组合选择器
+#### 2.4.4组合选择器
 
 格式：
 
@@ -752,52 +752,52 @@ html文档
 </html>
 ```
 
-#### 2.5CSS常用样式
+### 2.5CSS常用样式
 
-##### 1.字体颜色:
+#### 1.字体颜色:
 
 color
 
-##### 2.宽度
+#### 2.宽度
 
 width:
 
-##### 3.高度
+#### 3.高度
 
 height:
 
-##### 4.背景颜色
+#### 4.背景颜色
 
 background:
 
-##### 5.字体样式:
+#### 5.字体样式:
 
 font-size
 
-##### 6.div居中：
+#### 6.div居中：
 
 margin-left:auto;
 
 matgin-right:auto;
 
-##### 7.边框:
+#### 7.边框:
 
 border
 
-##### 8.文本居中：
+#### 8.文本居中：
 
 text-align:center
 
-##### 9.超链接去下划线：
+#### 9.超链接去下划线：
 
 text-decoration:none
 
-##### 10.表格细线:
+#### 10.表格细线:
 
 border: 1px black solid;/设置边框/
 border-collapse: collapse;/将边框合并/
 
-##### 11.ul无序列表去除符号:
+#### 11.ul无序列表去除符号:
 
 list-style: none;
 
@@ -805,7 +805,7 @@ list-style: none;
 
 ## 3.JavaScript
 
-#### 3.1JavaScript介绍
+### 3.1JavaScript介绍
 
 javaScript语言诞生主要是完成页面的数据验证，因此，它运行在客户端，需要运行浏览器来解析执行JavaScript代码。
 
@@ -831,9 +831,9 @@ i=‘abc’ 字符串类型
 安全性（不允许直接访问本地硬盘）
 跨平台性（只要是可以解释JS的浏览器都可以执行，和平台无关）
 
-#### 3.2JavaScript和HTML的结合方式
+### 3.2JavaScript和HTML的结合方式
 
-##### 3.2.1第一种方式
+#### 3.2.1第一种方式
 
 在head标签或者在body标签中使用script标签来书写JavaScript代码
 
@@ -853,7 +853,7 @@ i=‘abc’ 字符串类型
 </html>
 ```
 
-##### 3.2.2第二种方式
+#### 3.2.2第二种方式
 
 先写一个script文件，在导入进html文件
 
@@ -882,13 +882,13 @@ alert("hello world");
 </html>
 ```
 
-#### 3.3变量
+### 3.3变量
 
-##### 3.3.1变量类型
+#### 3.3.1变量类型
 
 和java差不多不赘述了
 
-##### 3.3.2特殊值
+#### 3.3.2特殊值
 
 undefined 未定义
 
@@ -896,32 +896,32 @@ null 空值
 
 NAN Not A Number 非数字类型
 
-##### 3.3.3变量定义格式
+#### 3.3.3变量定义格式
 
 var 变量名
 
 var 变量名=变量值
 
-#### 3.4关系运算
+### 3.4关系运算
 
 等于：== 是简单的做字面值的比较
 
 全等于：=== 除了做字面值的比较之外还会比较两个变量的数据类型
 
-#### 3.5逻辑运算
+### 3.5逻辑运算
 
 在javaScript语言中的变量，都可以作为一个boolean类型的变量去使用
 
 0,null,undefined,""（空串）都认为是false;
 
-##### 3.5.1&&且运算。
+#### 3.5.1&&且运算。
 
 有两种情况：
 
 1.当表达式全为真的时候。返回最后一个表达式的值
 2.当表达式中有一个为假的时候，返回第一个为假的表达式的值
 
-##### 3.5.2||或运算
+#### 3.5.2||或运算
 
 1.当表达式全为假的时候，返回最后一个表达式的值
 2.只要有一个表达式为真，就会返回第一个为真的表达式的值
@@ -930,7 +930,7 @@ var 变量名=变量值
 
 短路就是说，当这两个运算有结果了之后，后面的表达式就不再执行
 
-#### 3.6数组
+### 3.6数组
 
 js中数组的定义：
 
@@ -965,11 +965,11 @@ js中数组的定义：
 </html>
 ```
 
-#### 3.7函数
+### 3.7函数
 
 > *js中的函数不能够重载，会直接覆盖*
 
-##### 3.7.1函数的定义方式一：
+#### 3.7.1函数的定义方式一：
 
 function 函数名(形参列表){
 
@@ -1007,9 +1007,7 @@ function 函数名(形参列表){
 </html>
 ```
 
-
-
-##### 3.7.2函数定义的方式二：
+#### 3.7.2函数定义的方式二：
 
 var 函数名=function(形参列表){
 
@@ -1047,7 +1045,7 @@ var 函数名=function(形参列表){
 </html>
 ```
 
-##### 3.7.3函数的arguments隐形参数
+#### 3.7.3函数的arguments隐形参数
 
 js中的隐形参数和java中的可变参数一样，都是数组
 
@@ -1078,9 +1076,9 @@ js中的隐形参数和java中的可变参数一样，都是数组
 
 ```
 
-#### 3.8js中的自定义对象
+### 3.8js中的自定义对象
 
-##### 3.8.1Object形式的自定义对象	(和java中的类差不多感觉)
+#### 3.8.1Object形式的自定义对象	(和java中的类差不多感觉)
 
 var 变量名 =new Object()  
 
@@ -1110,7 +1108,7 @@ var 变量名 =new Object()
 </html>
 ```
 
-##### 3.8.2大括号定义的自定义对象(和定义一个标签的样式差不多感觉)
+#### 3.8.2大括号定义的自定义对象(和定义一个标签的样式差不多感觉)
 
 var 对象名={   属性：属性值   ，  后面用逗号而不是分号
 
@@ -1140,11 +1138,11 @@ var 对象名={   属性：属性值   ，  后面用逗号而不是分号
 </html>
 ```
 
-#### 3.9js中的事件
+### 3.9js中的事件
 
 > *事件是电脑输入设备和页面进行交互的响应*
 
-##### 3.9.1事件的注册
+#### 3.9.1事件的注册
 
 > *事件的注册就是告诉浏览器当事件响应后要执行哪些代码*
 
@@ -1152,7 +1150,7 @@ var 对象名={   属性：属性值   ，  后面用逗号而不是分号
 
 动态注册事件：通过js代码得到标签的dom对象，再通过dom对象.事件名=function(){} 这种形式赋予事件响应后的代码
 
-##### 3.9.2onload事件(加载完成事件)
+#### 3.9.2onload事件(加载完成事件)
 
 onload事件的浏览器解析完页面之后自动生成的
 
@@ -1178,7 +1176,7 @@ function onloadFun(){
 </html>
 ```
 
-##### 3.9.3onclick事件(单击事件)
+#### 3.9.3onclick事件(单击事件)
 
 按完按钮之后页面出现的响应
 
@@ -1216,7 +1214,7 @@ window.onclick=function(){
 </html>
 ```
 
-##### 3.9.4onblur事件(失去焦点事件)
+#### 3.9.4onblur事件(失去焦点事件)
 
 常用于输入框失去焦点后验证其输入内容是否合法。
 
@@ -1250,7 +1248,7 @@ window.onblur=function(){
 </html>
 ```
 
-##### 3.9.5onchange事件(内容发生改变事件)
+#### 3.9.5onchange事件(内容发生改变事件)
 
  常用于下拉列表和输入框内容发生改变后操作，每次改变之后都会自动调用该事件
 
@@ -1281,7 +1279,7 @@ window.onblur=function(){
 </html>
 ```
 
-##### 3.9.6onsumbit事件(表单提交事件)
+#### 3.9.6onsumbit事件(表单提交事件)
 
 常用于表单提交前，验证所有表单项是否合法
 
@@ -1322,7 +1320,7 @@ window.onsubmit=function(){
 </html>
 ```
 
-#### 3.10DOM模型(文档对象模型)
+### 3.10DOM模型(文档对象模型)
 
 > 当网页被加载时，浏览器会创建一个页面的文档对象模型，通过DOM模型，js可以访问和改变html文档的所有元素
 >
@@ -1344,7 +1342,7 @@ window.onsubmit=function(){
 
 ![image-20230412194142672](笔记图片/image-20230412194142672.png)
 
-##### 3.10.1Doucument文档中的方法
+#### 3.10.1Doucument文档中的方法
 
 > ##### getElementById:返回对拥有指定id的第一个对象的引用
 
@@ -1445,7 +1443,7 @@ var e1=document.getElementsByTagName("input");
 
 注意事项：id查询-->name查询-->tagname查询
 
-##### 3.10.2节点的常用属性和方法(节点就是标签对象)
+#### 3.10.2节点的常用属性和方法(节点就是标签对象)
 
 - childNodes属性，获取当前结点的所有子节点
 
@@ -1467,7 +1465,7 @@ var e1=document.getElementsByTagName("input");
 
 - innerText属性和innerHTML属性的区别
 
-#### 3.11正则表达式
+### 3.11正则表达式
 
 正则表达式定义：var 变量=/ /
 
@@ -1483,11 +1481,11 @@ var e1=document.getElementsByTagName("input");
 
 官网：https://jquery.com/
 
-#### 4.1介绍
+### 4.1介绍
 
 > jQuery就是Javascript和查询，辅助js开发的js类库
 
-#### 4.2JQuery的第一个程序
+### 4.2JQuery的第一个程序
 
 实现点击按钮显示hello
 
@@ -1512,7 +1510,7 @@ var e1=document.getElementsByTagName("input");
 </html>
 ```
 
-#### 4.3JQuery核心函数
+### 4.3JQuery核心函数
 
 $就是JQuery的核心函数
 
@@ -1539,7 +1537,7 @@ $就是JQuery的核心函数
 7. 将DOM对象包装为jQuery对象返回
    
 
-#### 4.4JQuery对象和DOM对象的区分
+### 4.4JQuery对象和DOM对象的区分
 
 > 通过DOM方法引用的对象全部都是DOM对象，通过JQuery库中的方法引用的对象全部都是JQuery对象
 >
@@ -1549,9 +1547,9 @@ $就是JQuery的核心函数
 >
 > JQuery对象转换为DOM对象：var dom=$obj[下标]  (因为JQuery对象就是DOM对象的数组)
 
-#### 4.5JQuery选择器
+### 4.5JQuery选择器
 
-##### 4.5.1基础选择器
+#### 4.5.1基础选择器
 
 ```html
 <!DOCTYPE htmlPUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -1665,7 +1663,7 @@ $就是JQuery的核心函数
 
 ```
 
-##### 4.5.2层级选择器
+#### 4.5.2层级选择器
 
 ancestor descendant  祖先和后代
 
@@ -1769,7 +1767,7 @@ prev ~ siblings	现节点后的所有siblings兄弟元素
 
 ```
 
-##### 4.5.3基本过滤选择器
+#### 4.5.3基本过滤选择器
 
 first() 方法返回被选元素的首个元素。
 
@@ -1803,7 +1801,7 @@ $(document).ready(function(){
 });
 ```
 
-##### 4.5.4内容过滤选择器
+#### 4.5.4内容过滤选择器
 
 ![image-20230414093959940](笔记图片/image-20230414093959940.png)
 
@@ -1815,7 +1813,7 @@ $(document).ready(function(){
 
 ![image-20230414094048841](笔记图片/image-20230414094048841.png)
 
-##### 4.5.5属性过滤选择器
+#### 4.5.5属性过滤选择器
 
 ![image-20230414093415692](笔记图片/image-20230414093415692.png)
 
@@ -1843,15 +1841,15 @@ $(document).ready(function(){
 
 ![image-20230414093848743](笔记图片/image-20230414093848743.png)
 
-##### 4.5.6表单过滤选择器
+#### 4.5.6表单过滤选择器
 
 :标签名就可以直接选择
 
-#### 4.6JQuery元素筛选
+### 4.6JQuery元素筛选
 
 和选择器差不多
 
-#### 4.7JQuery中方法
+### 4.7JQuery中方法
 
 html()：可以设置和获取起始标签和结束标签中的内容
 
@@ -1987,7 +1985,7 @@ prop() 可以设置和获取属性的值，只推荐操作checked、readOnly、s
 </html>
 ```
 
-#### 4.8JQuery中全选，全不选，反选
+### 4.8JQuery中全选，全不选，反选
 
 ```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -2079,7 +2077,7 @@ prop() 可以设置和获取属性的值，只推荐操作checked、readOnly、s
 
 ```
 
-#### 4.9DOM增删改
+### 4.9DOM增删改
 
 1.内部插入：
 
@@ -2222,7 +2220,7 @@ empty() a.empty(); 清空标签a里的内容
 
 ```
 
-#### 4.10JQuery实现简单的页面管理系统
+### 4.10JQuery实现简单的页面管理系统
 
 ```html
 <!DOCTYPE html>
@@ -2316,7 +2314,7 @@ empty() a.empty(); 清空标签a里的内容
 </html>
 ```
 
-#### 4.11CSS操作样式
+### 4.11CSS操作样式
 
 - addClass() 添加样式。
 - removeClass() 删除样式。
@@ -2398,7 +2396,7 @@ empty() a.empty(); 清空标签a里的内容
 
 ```
 
-#### 4.12JQuery动画操作
+### 4.12JQuery动画操作
 
 ```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -2493,9 +2491,9 @@ empty() a.empty(); 清空标签a里的内容
 
 ```
 
-#### 4.13JQuery事件操作
+### 4.13JQuery事件操作
 
-##### 4.13.1原生js和jQuery加载完成之后的区别
+#### 4.13.1原生js和jQuery加载完成之后的区别
 
 ***他们分别在什么时候触发？***
 
@@ -2510,13 +2508,13 @@ jQuery页面加载完成之后先执行
 原生js的页面加载完成之后，只会执行最后一次赋值函数
 jQuery的页面加载完成之后是全部把注册的function函数，依次顺序全部执行。
 
-##### 4.13.2事件的冒泡
+#### 4.13.2事件的冒泡
 
 事件的冒泡是指，父子元素同时监听同一个事件。当触发子元素的事件的时候，同时也被传递到了父元素的事件里去响应。
 
 在事件函数体内，return false可以阻止事件的冒泡传递。
 
-#### 4.14JQuery验证input内容
+### 4.14JQuery验证input内容
 
 其实之前写过一次很简单，然后这次我自己设置了个页面，代码是这样的
 
@@ -2760,4 +2758,254 @@ jQuery的页面加载完成之后是全部把注册的function函数，依次顺
 ![image-20230416001539332](笔记图片/image-20230416001539332.png)
 
 ## 5.XML
+
+![image-20230416094531967](笔记图片/image-20230416094531967.png)
+
+### 5.1xml的主要作用有：
+
+1. 用来保存数据，而且这些数据具有自我描述性
+2. 它还可以作为项目或模块的配置文件
+3. 还可以作为网络传输数据的格式（JSON为主)
+
+xml文件示例
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<books>
+    <book sn="SN123456789">
+        <name>白夜行</name>
+        <author>东野圭吾</author>
+        <price>30</price>
+    </book>
+
+    <book>
+        <name>魔球</name>
+        <author>东野圭吾</author>
+        <price>20</price>
+
+    </book>
+</books>
+```
+
+### 5.2xml语法规则
+
+- 所有xml元素必须有关闭标签
+- xml标签对大小写敏感
+- xml必须正确的嵌套
+- xml文档必须有根元素
+- xml的属性值加引号(和html类似)
+- xml空格会被保留(不像html)
+
+### 5.3xml命名规则
+
+![image-20230416095137847](笔记图片/image-20230416095137847.png)
+
+![image-20230416095155040](笔记图片/image-20230416095155040.png)
+
+### 5.4dom4j解析xml文件
+
+要想使用dom4j，要先导入jar包，推荐个很牛逼的网站：https://mvnrepository.com，进去之后直接搜dom4j再下载jar包就行了
+
+要先创建好xml文件对应的类
+
+book类
+
+```java
+package XML;
+
+public class book {
+    private String name;
+    private String author;
+    private String sn;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public book(String name, String author, double price,String sn) {
+        this.name = name;
+        this.author = author;
+        this.price = price;
+        this.sn=sn;
+    }
+
+    @Override
+    public String toString() {
+        return "book{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", sn='" + sn + '\'' +
+                ", price=" + price +
+                '}';
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    private double price;
+
+}
+```
+
+xml文件如上
+
+测试类
+
+```java
+package XML;
+
+import com.sun.org.apache.xerces.internal.dom.ElementNSImpl;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.junit.Test;
+
+import java.util.List;
+
+public class Dom4jTest {
+    @Test
+    public void test1(){
+        SAXReader saxReader=new SAXReader();
+        try {
+            Document document=saxReader.read("src/XML/books.xml");
+            System.out.println(document);
+        } catch (DocumentException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void test2() throws Exception{
+        SAXReader saxReader=new SAXReader();
+        Document document= saxReader.read("src/XML/books.xml");
+        Element rootElement=document.getRootElement();
+        System.out.println(rootElement);
+        List<Element> book = rootElement.elements("book");
+        for(Element b:book){
+            //直接获取内容
+            String nameText=b.elementText("name");
+            String priceText=b.elementText("price");
+            String authorText=b.elementText("author");
+            System.out.println(nameText+priceText+authorText);
+            //获取属性值
+            String snValue=b.attributeValue("sn");
+            System.out.println(new book(nameText,authorText,Double.parseDouble(priceText),snValue));
+        }
+    }
+}
+
+```
+
+## 6.Tomcat
+
+直接去官网下载tomcat：https://tomcat.apache.org/
+
+然后涉及到环境变量的配置这个自己去网上找教程就可以了，但是要注意jdk版本不能太高，要不然一直无法运行tomcat(我就是这样的)
+
+再然后就是在IDEA上面部署web模板，照着网上弄就行了，我的tomcat下载的是7.xx的版本然后在运行原始的jsp文件时候会报错，报错如下
+
+```
+严重: Unable to process Jar entry [META-INF/versions/9/module-info.class] from Jar [jar:file:/D:/workspace/tomcat/out/artifacts/tomcat_war_exploded/WEB-INF/lib/gson-2.10.1.jar!/] for annotations org.apache.tomcat.util.bcel.classfile.ClassFormatException: In
+```
+
+这是因为自己的tomcat版本过低但是导入的jar包版本过高，解放方法有两种，第一种是下载更高版本的tomcat，第二种是下载更低版本的jar包直到不报错就行
+
+还有一个报错是显示端口被占用，改个端口就行了
+
+## 7.Servlet
+
+### 7.1什么是Servlet
+
+- Servlet是java的规范之一，规范就是接口
+- Servlet是java3大组件之一。Servlet程序，Filter过滤器和Listener监听器
+- Servlet是运行在服务器上的一个java小程序，能够接收客户端发来的请求并响应数据给客户端
+
+### 7.2第一个Servlet程序
+
+xml文件
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="2.5">
+<!--servlet标签给Tomcat配置Servlet程序-->
+
+    <servlet>
+        <!--servlet-name标签给Servlet程序起一个别名(一般是类名)-->
+        <servlet-name>HelloServlet</servlet-name>
+        <!--servlet-class标签是Servlet程序的全类名-->
+        <servlet-class>com.fzj.Servlet.HelloServlet</servlet-class>
+    </servlet>
+
+
+    <!--给servlet程序配置访问地址-->
+    <servlet-mapping>
+        <!--告诉服务器我当前配置的地址给哪个servlet程序使用-->
+        <servlet-name>HelloServlet</servlet-name>
+        <!--配置访问地址
+             /在服务器解析的时候表示地址为http://ip:port/工程路径
+             /hello表示地址为http://ip:port/工程路径/hello
+        -->
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+</web-app>
+```
+
+java类
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.*;
+import java.io.IOException;
+
+public class HelloServlet implements Servlet {
+
+
+    @Override
+    public void init(ServletConfig servletConfig) throws ServletException {
+
+    }
+
+    @Override
+    public ServletConfig getServletConfig() {
+        return null;
+    }
+
+    @Override
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+        System.out.println("Hello Servlet");
+    }
+
+    @Override
+    public String getServletInfo() {
+        return null;
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
+
+```
 
