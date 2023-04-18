@@ -3009,3 +3009,168 @@ public class HelloServlet implements Servlet {
 
 ```
 
+### 7.3Servlet生命周期
+
+1. 执行Servlet构造器方法
+
+2. 执行init初始化方法
+
+   第一、二步，是在第一次访问的时候创建Servlet程序会调用，说明这个程序是单例的。
+
+3. 执行service方法
+
+   第三步：每次访问都会调用
+
+4. 执行destory销毁方法
+
+   第四步：在web工程停止的时候调用
+
+### 7.4请求的分发处理
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="http://localhost:7777/tomcat/hello" method="get">
+  <input type="submit">
+</form>
+</body>
+</html>
+```
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
+public class HelloServlet implements Servlet {
+
+
+    @Override
+    public void init(ServletConfig servletConfig) throws ServletException {
+
+    }
+
+    @Override
+    public ServletConfig getServletConfig() {
+        return null;
+    }
+
+    @Override
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+        System.out.println("Servlet启动");
+        HttpServletRequest httpServletRequest= (HttpServletRequest) servletRequest;
+        if("GET".equals(httpServletRequest.getMethod())){
+            System.out.println("GET方法");
+        }
+        else if("POST".equals(httpServletRequest.getMethod())){
+            System.out.println("POST方法");
+        }
+    }
+
+    @Override
+    public String getServletInfo() {
+        return null;
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
+```
+
+### 7.5通过继承HttpServlet类实现Servlet程序
+
+servlet.xml文件也要配置一下，依葫芦画瓢就行了
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class HelloServlet1 extends HttpServlet {
+    @Override
+    //在get请求的时候调用
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("doGet方法");
+    }
+    //在post请求的时候调用
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("doPost方法");
+    }
+}
+```
+
+### 7.6IDEA菜单生成Servlet程序
+
+package下new一个Servlet再输入类名就行了
+
+### 7.7.整个Servlet的继承体系
+
+![image-20230418220836624](笔记图片/image-20230418220836624.png)
+
+### 7.8ServletConfig
+
+ xml文件
+
+![image-20230418222809574](笔记图片/image-20230418222809574.png)
+
+Servlet程序
+
+![image-20230418222833712](笔记图片/image-20230418222833712.png)
+
+如果要在自己的Servlet程序中重写init类，要保留父类中的init方法不然会报空指针异常，除非子类中重写的方法也初始化了ServletConfig对象，但是我没有保留父类的方法也没有初始化ServletConfig对象也没有报错...
+
+### 7.9ServletContext
+
+web.xml中的配置
+
+![image-20230418232326305](笔记图片/image-20230418232326305.png)
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class ContextServletTest extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获取ServletContext对象
+        ServletContext servletContext = getServletContext();
+        //设置数据
+        servletContext.setAttribute("key1","value1");
+        //获取数据
+        System.out.println("context-param参数key1的值是："+servletContext.getAttribute("key1"));
+        //获取web.xml中配置的上下文参数context-param
+        String username = servletContext.getInitParameter("username");
+        String url = servletContext.getInitParameter("url");
+        System.out.println("context-param参数username的值是："+username);
+        System.out.println("context-param参数url的值是："+url);
+        //获取当前的工程路径，格式：/工程路径
+        System.out.println("当前工程路径："+servletContext.getContextPath());
+        //获取工程部署后在服务器硬盘上的绝对路径
+        //斜杠被服务器解析地址为：http://ip:port/工程路径/  映射到IDEA代码的web目录
+        System.out.println("工程部署的路径是："+servletContext.getRealPath("/"));
+        System.out.println("工程下css目录的绝对路径是："+servletContext.getRealPath("/css"));
+        System.out.println("工程下imgs目录的绝对路径是："+servletContext.getRealPath("/imgs"));
+
+    }
+}
+
+```
+
+ServletContext存储对象，因为一个工程只有一个ServletContext对象，所以他们的属性和值是可以共用的，我现在创建一个ServletContext对象为S1，S1中设置key1为value1，我现在再创建一个ServletContext对象为S2，通过S2可以存储S1的key1和value1
