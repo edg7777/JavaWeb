@@ -3131,7 +3131,7 @@ Servlet程序
 
 ![image-20230418222833712](笔记图片/image-20230418222833712.png)
 
-如果要在自己的Servlet程序中重写init类，要保留父类中的init方法不然会报空指针异常，除非子类中重写的方法也初始化了ServletConfig对象，但是我没有保留父类的方法也没有初始化ServletConfig对象也没有报错...
+如果要在自己的Servlet程序中重写init类，要保留父类中的init方法不然会报空指针异常，除非子类中重写的方法也初始化了ServletConfig对象，但是我没有保留父类的方法也没有初始化ServletConfig对象也没有报错不知道为啥...
 
 ### 7.9ServletContext
 
@@ -3174,3 +3174,46 @@ public class ContextServletTest extends HttpServlet {
 ```
 
 ServletContext存储对象，因为一个工程只有一个ServletContext对象，所以他们的属性和值是可以共用的，我现在创建一个ServletContext对象为S1，S1中设置key1为value1，我现在再创建一个ServletContext对象为S2，通过S2可以存储S1的key1和value1
+
+### 7.10HTTP
+
+HTTP协议指的是客户端和服务端通信时，发送的数据需要遵守的协议，HTTP协议中的数据叫做报文
+
+#### 7.10.1GET请求协议内容
+
+![image-20230419195601757](笔记图片/image-20230419195601757.png)
+
+![image-20230419195537782](笔记图片/image-20230419195537782.png)
+
+#### 7.10.2POST请求协议内容
+
+请求行和请求头和上述GET方式一样，多了个请求体来加载自己提交上去的数据
+
+![image-20230419200405378](笔记图片/image-20230419200405378.png)
+
+#### 7.10.3GET请求和POST请求的区分
+
+GET请求：
+
+- form标签中method=get
+- a标签
+- link标签中引入css
+- Script标签中引入js文件
+- img标签中引入图片
+- iframe引入html页面
+- 在浏览器地址栏输入地址后敲回车
+
+POST请求：
+
+- ​	form标签中method=post
+
+#### 7.10.4常见的响应码说明
+
+- 200 	 表示请求成功
+- 302     表示请求重定向
+- 404	 表示请求服务器已经收到了，但是你要的数据不存在(请求地址错误)
+- 500 	表示服务器已经收到请求，但是服务器内部错误(代码错误)
+
+#### 7.10.5MIME类型说明
+
+![image-20230419201802084](笔记图片/image-20230419201802084.png)
