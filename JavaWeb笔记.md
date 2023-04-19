@@ -3217,3 +3217,56 @@ POST请求：
 #### 7.10.5MIME类型说明
 
 ![image-20230419201802084](笔记图片/image-20230419201802084.png)
+
+### 7.11HttpServletRequest类
+
+每次只要有请求进入Tomcat服务器，Tomcat服务器就会把请求过来的HTTP协议信息解析好封装到Request对象中。
+
+然后传递到service,doGet,doPost方法中给我们使用，我们可以通过HttpServletRequest对象获取到所有请求的信息
+
+ ![image-20230419232247795](笔记图片/image-20230419232247795.png)
+
+```java
+package com.fzj.Servlet;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.util.Arrays;
+
+public class RequestTest extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("request对象获取请求的资源路径"+request.getRequestURI());
+        System.out.println("request对象获取请求的统一资源定位符（绝对路径）"+request.getRequestURL());
+        System.out.println("request对象获取请求的ip地址"+request.getRemoteAddr());
+        System.out.println("request对象获取请求的方式"+request.getMethod());
+        System.out.println("获取请求头"+request.getHeader("user-agent"));
+        //获取请求的参数值
+        System.out.println("获取请求的参数username的值"+request.getParameter("username"));
+        System.out.println("获取请求的参数password的值"+request.getParameter("password"));
+        //获取请求的参数值的数组
+        String[] hobbies = request.getParameterValues("hobby");
+        for (String hobby : hobbies) {
+            System.out.println(hobby);
+        }
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获取请求的参数值
+        System.out.println("获取请求的参数username的值"+request.getParameter("username"));
+        System.out.println("获取请求的参数password的值"+request.getParameter("password"));
+        //获取请求的参数值的数组
+        String[] hobbies = request.getParameterValues("hobby");
+        for (String hobby : hobbies) {
+            System.out.println(hobby);
+        }
+    }
+}
+
+```
+
+![image-20230419232305949](笔记图片/image-20230419232305949.png)
+
+如果出现中文乱码，可以再获取参数值之前设置request.setCharacterEncoding("utf-8")，但是我这么设置之后依然会出现中文乱码，然后发现可以将tomcat中conf文件夹的server.xml文件改成如下，在原来的这个位置新增一个URIEncoding="UTF-8"，保存之后就不会出现中文乱码了
+
+![image-20230419232600068](笔记图片/image-20230419232600068.png)
