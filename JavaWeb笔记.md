@@ -3270,3 +3270,117 @@ public class RequestTest extends HttpServlet {
 如果出现中文乱码，可以再获取参数值之前设置request.setCharacterEncoding("utf-8")，但是我这么设置之后依然会出现中文乱码，然后发现可以将tomcat中conf文件夹的server.xml文件改成如下，在原来的这个位置新增一个URIEncoding="UTF-8"，保存之后就不会出现中文乱码了
 
 ![image-20230419232600068](笔记图片/image-20230419232600068.png)
+
+### 7.12请求的转发
+
+> 服务器收到请求之后，从一个资源跳到另一个资源
+
+![image-20230420223504093](笔记图片/image-20230420223504093.png)
+
+Servlet1代码，xml配置文件就不放了
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class Servlet1 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获取请求的参数
+        String username = request.getParameter("username");
+        System.out.println("在Servlet1中查看参数"+username);
+        //给材料盖一个章
+        request.setAttribute("key1","Servlet1数据");
+
+        //转发到Servlet2资源
+        //RequestDispatcher requestDispatcher = request.getRequestDispatcher("/servlet2");
+
+        //还可以转发到WEB-INF目录下的资源
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/a.html");
+        requestDispatcher.forward(request,response);
+
+    }
+}
+
+```
+
+Servlet2代码
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class Servlet2 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获取请求的参数
+        String username = request.getParameter("username");
+        System.out.println("在Servlet2中查看Servlet1中的参数"+username);
+
+        //查看Servlet1中存储的数据
+        Object key1 = request.getAttribute("key1");
+        System.out.println("Servlet1中存储的数据是"+key1);
+
+        //处理自己的业务逻辑
+        System.out.println("处理Servlet2自己的业务");
+    }
+}
+
+```
+
+### 7.13base标签的作用
+
+![image-20230420224817749](笔记图片/image-20230420224817749.png)
+
+有base标签之后就会将浏览器地址值忽略掉，让相对路径都参照base标签中的值
+
+### 7.14Web中的相对路径和绝对路径
+
+1.相对路径：
+
+.  表示当前目录
+
+.. 表示上级目录
+
+2.绝对路径：
+
+http://ip/port/工程名/
+
+![image-20230420230158699](笔记图片/image-20230420230158699.png)
+
+### 7.15HttpServletResponse类
+
+每次请求进来，tomcat服务器都会创建一个Response对象传递给Servlet程序去使用，HttpServletResponse表示所有响应的信息 
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class ResponseTest extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //两个流不能同时使用，会报错
+//        response.getWriter();
+//        response.getOutputStream();
+        response.setCharacterEncoding("utf-8");
+        response.setHeader("Content-Type","text/html;charset=utf-8");
+        PrintWriter writer = response.getWriter();
+        writer.write("hello response");
+        writer.write("你好 response");
+    }
+}
+```
+
+以上包含了响应流出现中文乱码的解决办法
+
+### 7.16重定向
