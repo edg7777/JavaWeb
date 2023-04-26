@@ -3383,4 +3383,229 @@ public class ResponseTest extends HttpServlet {
 
 以上包含了响应流出现中文乱码的解决办法
 
-### 7.16重定向
+### 7.16请求重定向
+
+指客户端给服务器发请求，然后服务器给客户端新地址，让客户端去新地址访问
+
+![image-20230421224702958](笔记图片/image-20230421224702958.png)
+
+Response1
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class Response1 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("经过了Response1");
+        //设置状态码302表示重定向
+        //response.setStatus(302);
+
+        //设置响应头location,说明新的地址
+        //response.setHeader("location","/tomcat/response2");
+
+        //简单的重定向方法
+        response.sendRedirect("/tomcat/response2");
+
+
+    }
+}
+
+```
+
+Response2
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class Response2 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.getWriter().write("hello response2");
+
+    }
+}
+
+```
+
+## 8.JAVAEE的三层架构
+
+先创建书城需要的数据库和表
+
+编写数据库对应的javabean对象
+
+编写jdbcutils工具类
+
+编写BaseDao
+
+编写具体的类Dao 
+
+编写UserService
+
+![image-20230422101529159](笔记图片/image-20230422101529159.png)
+
+![image-20230422101758600](笔记图片/image-20230422101758600.png)
+
+## 9.文件的上传
+
+在这里浏览器突然显示了一个此站点链接不安全的bug，网上一查才发现是action后面的http写成了https
+
+html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form action="http://localhost:7777/tomcat/uploadservlet" method="post" enctype="multipart/form-data">
+    用户名：<input type="text" name="username"><br/>
+    头像：<input type="file" name="photo"><br/>
+    <input type="submit" value="上传头像">
+  </form>
+</body>
+</html>
+```
+
+Servlet程序
+
+```java
+package com.fzj.Servlet;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class UploadServlet extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("文件成功上传了");
+
+    }
+}
+```
+
+### 9.1解析上传的文件
+
+```java
+package com.fzj.Servlet;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.util.List;
+
+public class UploadServlet extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("文件成功上传了");
+//        ServletInputStream inputStream = request.getInputStream();
+//        byte[] buffer = new byte[102400];
+//        int read = inputStream.read(buffer);
+//        System.out.println(new String(buffer,0,read));
+        //创建FileItemFactory工厂实现类
+        FileItemFactory fileItemFactory = new DiskFileItemFactory();
+        //创建用于解析上传数据的工具类ServletFileUpload类
+        ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
+        //解析上传的数据，得到每一个表单项FileItem
+        try {
+            List<FileItem> list=servletFileUpload.parseRequest(request);
+            //循环判断，每一个表单项，是普通类型，还是上传的文件
+            for(FileItem fileItem:list){
+                if(fileItem.isFormField()){
+                    //普通表单项
+                    System.out.println("表单项的name属性值"+fileItem.getFieldName());
+                    //参数UTF-8解决乱码问题
+                    System.out.println("表单项的value属性值"+fileItem.getString("UTF-8"));
+                }
+                else{
+                    //上传的文件
+                    System.out.println("表单项的name属性值"+fileItem.getFieldName());
+                    System.out.println("上传的文件名"+fileItem.getName());
+                    fileItem.write(new java.io.File("D:\\"+fileItem.getName()));
+                }
+            }
+        } catch (FileUploadException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+}
+
+```
+
+### 9.2获取上传的文件
+
+```java
+package com.fzj.Servlet;
+
+import org.apache.commons.io.IOUtils;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+
+public class DownloadServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //读取要下载的文件名
+        String downloadFileName = "Snipaste_2023-04-14_12-11-04.png";
+        //读取要下载的文件内容（通过ServletContext对象可以读取）
+        ServletContext servletContext = getServletContext();
+        //获取要下载的文件类型
+        String mimeType = servletContext.getMimeType("/imgs/" + downloadFileName);
+        System.out.println("下载的文件类型："+mimeType);
+        //在回传前，通过响应头告诉客户端返回的数据类型
+        response.setContentType(mimeType);
+
+        //设置content-disposition响应头，表示收到的数据怎么处理
+        //attachment表示附件，表示下载使用
+        //filename=表示指定下载的文件名
+//        response.setHeader("content-disposition","attachment;filename="+downloadFileName);
+        //使用URLEncoder.encode对文件名进行编码让中文文件名正确显示
+        response.setHeader("content-disposition","attachment;filename="+ URLEncoder.encode("中国.jpg","UTF-8"));
+
+        InputStream resourceAsStream = servletContext.getResourceAsStream("/imgs/" + downloadFileName);
+        OutputStream outputStream=response.getOutputStream();
+        //把下载的文件内容回传给客户端
+        IOUtils.copy(resourceAsStream,outputStream);
+    }
+}
+
+```
+
+## 10.Cookie
+
+### 10.1什么是Cookie
+
+1. Cookie是服务器通知客户端保存键值对的技术
+2. 客户端有了Cookie之后，每次请求都发送给服务器
+3. 每个Cookie的大小不能超过4kb
+
+### 10.2Cookie的创建
+
